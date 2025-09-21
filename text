@@ -1,0 +1,18 @@
+'use strict';
+console.dir({ hoistedVar });
+var hoistedVar = 'Я змінна "var"';
+console.dir({ hoistedVar });
+try {
+    console.dir({ hoistedLet });
+} catch (e) {
+    console.log('Помилка: ReferenceError:', e.message);
+}
+let hoistedLet = 'Я змінна "let"';
+let number = 10;
+const obj = { number: 20 };
+let newNumber = number;
+newNumber = 100;
+console.dir({ originalNumber: number, changedNumber: newNumber });
+const newObj = obj;
+newObj.number = 200;
+console.dir({ originalObj: obj, changedObj: newObj });
