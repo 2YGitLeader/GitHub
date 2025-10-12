@@ -1,0 +1,50 @@
+const random = (a, b) => {
+  const min = (typeof b === 'undefined') ? 0 : a;
+  const max = (typeof b === 'undefined') ? a : b;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+const generateKey = (length, characters) => {
+  let key = '';
+  const maxIndex = characters.length - 1; 
+  for (let i = 0; i < length; i++) {
+    const randomIndex = random(maxIndex); 
+    key += characters[randomIndex];
+  }
+  return key;
+};
+const ipToNumber = (ip = '127.0.0.1') => {
+  const octets = ip.split('.').map(Number);
+  return octets.reduce((acc, octet, i) => {
+    const shiftBits = (3 - i) * 8;
+    return acc | (octet << shiftBits);
+  }, 0); 
+};
+const introspectObject = (iface) => {
+  const result = [];
+  for (const key in iface) {
+    if (Object.hasOwn(iface, key)) {
+      const value = iface[key];
+      if (typeof value === 'function') {
+       [ім'я ключа, кількість аргументів функції (.length)]
+        result.push([key, value.length]);
+      }
+    }
+  }
+
+  return result;
+};
+console.log(`random(1, 10): ${random(1, 10)}`);
+console.log(`random(5): ${random(5)}`);
+const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+const key = generateKey(16, characters);
+console.log(`Згенерований ключ: ${key}`);
+console.log(`'10.0.0.1' -> ${ipToNumber('10.0.0.1')}`);
+console.log(`'127.0.0.1' -> ${ipToNumber()}`);
+console.log(`'192.168.1.10' -> ${ipToNumber('192.168.1.10')}`);
+const iface = {
+  m1: x => [x],
+  m2: function (x, y) { return [x, y]; },
+  m3(x, y, z) { return [x, y, z]; },
+  d1: 123,
+};
+console.log(introspectObject(iface));
