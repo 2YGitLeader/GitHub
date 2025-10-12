@@ -1,0 +1,86 @@
+let myName = 'Kyrylo';
+const birthYear = 2007;
+const greet = (name) => {
+  console.log(`Привіт, ${name}!`);
+const range = (start, end) => {
+  const result = [];
+  for (let i = start; i <= end; i++) {
+    result.push(i);
+  }
+  return result;
+};
+const rangeOdd = (start, end) => {
+  const result = [];
+  let i = start % 2 === 0 ? start + 1 : start;
+  for (; i <= end; i += 2) {
+    result.push(i);
+  }
+  return result;
+};
+const average = (a, b) => (a + b) / 2;
+const square = (x) => x * x;
+const cube = (x) => x * x * x;
+
+const calculate = () => {
+  const results = [];
+  for (let i = 0; i < 10; i++) {
+    const avg = average(square(i), cube(i));
+    results.push(avg);
+  }
+  return results;
+};
+const fn = () => {
+  const constObj = { name: 'Constant Object' };
+  let letObj = { name: 'Let Object' };
+  constObj.name = 'New Name in Const Object';
+  letObj.name = 'New Name in Let Object';
+  letObj = { name: 'Completely New Object' };
+   constObj = { name: 'Error Object' }; // Це призведе до TypeError
+};
+
+const createUser = (name, city) => {
+  return { name, city };
+};
+const phonebookArray = [
+  { name: 'Marcus Aurelius', phone: '+380465554433' },
+  { name: 'Emperor Nero', phone: '+380257776655' },
+  { name: 'Lucius Verus', phone: '+380171112233' }
+];
+
+const findPhoneByNameArray = (name) => {
+  for (let i = 0; i < phonebookArray.length; i++) {
+    if (phonebookArray[i].name === name) {
+      return phonebookArray[i].phone;
+    }
+  }
+  return undefined;
+};
+const phonebookHash = {
+  'Marcus Aurelius': '+380465554433',
+  'Emperor Nero': '+380257776655',
+  'Lucius Verus': '+380171112233'
+};
+const findPhoneByNameHash = (name) => {
+  return phonebookHash[name];
+};
+console.log('--- 1. Ідентифікатори ---');
+greet(myName);
+console.log('Рік народження:', birthYear);
+
+console.log('\n--- 2. Цикли ---');
+console.log('Range [15, 30]:', range(15, 30));
+console.log('Range Odd [15, 30]:', rangeOdd(15, 30));
+
+console.log('\n--- 3. Функції ---');
+console.log('Квадрат 5:', square(5));
+console.log('Куб 5:', cube(5));
+console.log('Середнє (2, 8):', average(2, 8));
+console.log('Calculate results (0-9):', calculate());
+
+console.log('\n--- 4. Об\'єкти ---');
+fn(); 
+console.log('New User:', createUser('Marcus Aurelius', 'Roma'));
+
+console.log('\n--- 5. Колекції ---');
+console.log('Array find "Marcus Aurelius":', findPhoneByNameArray('Marcus Aurelius'));
+console.log('Hash find "Emperor Nero":', findPhoneByNameHash('Emperor Nero'));
